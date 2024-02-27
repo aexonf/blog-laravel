@@ -2,25 +2,26 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use App\Models\Posts;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Actions\EditAction;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteBulkAction;
 use App\Filament\Resources\PostsResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\PostsResource\Pages\CreatePosts;
 use App\Filament\Resources\PostsResource\Pages\EditPosts;
 use App\Filament\Resources\PostsResource\Pages\ListPosts;
 use App\Filament\Resources\PostsResource\RelationManagers;
-use App\Filament\Resources\PostsResource\Pages\CreatePosts;
+use App\Models\Posts;
+use Filament\Actions\EditAction;
+use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PostsResource extends Resource
 {
@@ -54,7 +55,23 @@ class PostsResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('user.name')
+                ->numeric()
+                ->sortable(),
+            Tables\Columns\TextColumn::make('title')
+                ->searchable(),
+            Tables\Columns\TextColumn::make('slug')
+                ->searchable(),
+            Tables\Columns\TextColumn::make('thumbnail')
+                ->searchable(),
+            Tables\Columns\TextColumn::make('created_at')
+                ->dateTime()
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
+            Tables\Columns\TextColumn::make('updated_at')
+                ->dateTime()
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
