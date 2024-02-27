@@ -40,7 +40,7 @@ class TopicsResource extends Resource
                     ->debounce(500)
                     ->afterStateUpdated(fn (Forms\Set $set, string $state) => $set('slug', Str::slug($state)))
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)->unique(ignoreRecord: true) ->validationMessages([ 'unique' => 'Topic ini sudah tersedia.', ]),
                 Forms\Components\TextInput::make('slug')
                     ->readOnly()
                     ->required(),
