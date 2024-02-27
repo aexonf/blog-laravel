@@ -1,7 +1,7 @@
 <?php
 
+use App\Livewire\Post\ListPost;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', ListPost::class)->name('homepage');
