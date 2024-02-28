@@ -44,6 +44,12 @@ class TopicsResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->readOnly()
                     ->required(),
+                Forms\Components\Select::make('topics')
+                    ->relationship('topics', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -56,6 +62,7 @@ class TopicsResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('topics.name'),
             ])
             ->filters([
                 //
